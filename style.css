@@ -50,11 +50,12 @@ html, body{
 
 .textbox{
     width: 80%;
-    height: 4vh;
+    height: 5vh;
     border-top-style: hidden;
     border-left-style: hidden;
     border-right-style: hidden;
     transition: 1s;
+    font-size: 25px;
 }
 
 .textbox:hover, .textbox:focus{
@@ -65,12 +66,14 @@ h1{
     font-size: 60px;
     font-family: "고딕14";
     font-weight: 500;
+    transition: 1s;
 }
 
 h2{
     text-align: left;
     margin-left: 9.8%;
     font-size: 40px;
+    transition: 1s;
 }
 
 button{
@@ -91,6 +94,7 @@ button:hover{
 
 p{
     font-size: 30px;
+    transition: 1s;
 }
 
 @font-face {
