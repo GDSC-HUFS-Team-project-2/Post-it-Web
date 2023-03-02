@@ -4,7 +4,7 @@ import shareIcon from "../assets/shareIcon.svg";
 import paper_1 from "../assets/paper_1.png";
 import paper_3 from "../assets/paper_3.png";
 
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import data from "../example_data/note_user_id.json";
 
@@ -127,7 +127,7 @@ const AddButton = styled(FloatingButton)`
 `;
 
 function PostIt(props) {
-  return props.data.post_data.map((x, i) => {
+  return props.data.map((x, i) => {
     return (
       <PostItBox>
         <Text>{x.content_text}</Text>
@@ -137,10 +137,47 @@ function PostIt(props) {
   });
 }
 
+function ClipboardCopy(props) {
+  const doCopy = (text) => {
+    if (navigator.clipboard) {
+      navigator.clipboard
+        .writeText(text)
+        .then(() => {
+          alert("클립보드에 복사되었습니다.");
+        })
+        .catch(() => {
+          alert("복사를 다시 시도해주세요.");
+        });
+    } else {
+      if (!document.queryCommandSupported("copy")) {
+        return alert("복사하기가 지원되지 않는 브라우저입니다.");
+      }
+
+      const textarea = document.createElement("textarea");
+      textarea.value = text;
+      textarea.style.top = 0;
+      textarea.style.left = 0;
+      textarea.style.position = "fixed";
+
+      document.body.appendChild(textarea);
+      // focus() -> 사파리 브라우저 서포팅
+      textarea.focus();
+      // select() -> 사용자가 입력한 내용을 영역을 설정할 때 필요
+      textarea.select();
+      document.execCommand("copy");
+      document.body.removeChild(textarea);
+      alert("클립보드에 복사되었습니다.");
+    }
+  };
+  console.log(props);
+  return <ShareButton onClick={() => doCopy(props.url)}></ShareButton>;
+}
+
 function Note() {
   let navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   let [post, setPost] = useState(data);
+  const location = useLocation();
 
   useEffect(() => {
     // 쿠키 가져오기
@@ -149,7 +186,8 @@ function Note() {
 
     // 로그인 하지 않았다고 가정
     setIsLoggedIn(false);
-  });
+    console.log(location.pathname);
+  }, [location]);
   if (!isLoggedIn) {
     // 로그인 안한 상태
     return (
@@ -168,10 +206,10 @@ function Note() {
           </Header>
           <Line />
           <Content>
-            <PostIt data={post}></PostIt>
+            <PostIt data={post.post_data}></PostIt>
           </Content>
           <FloatingButtonContainer>
-            <ShareButton />
+            <ClipboardCopy url={location.pathname} />
             <AddButton
               onClick={() => {
                 navigate("/note/:note_id/write");
