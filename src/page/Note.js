@@ -2,6 +2,7 @@ import styled from "styled-components";
 import addIcon from "../assets/addIcon.svg";
 import shareIcon from "../assets/shareIcon.svg";
 import paper_1 from "../assets/paper_1.png";
+import { useNavigate } from "react-router-dom";
 
 const Background = styled.div`
   background-color: #fff1a8;
@@ -16,6 +17,9 @@ const Wrap = styled.div`
   position: relative;
   overflow-y: scroll;
   overflow-x: hidden;
+  ::-webkit-scrollbar {
+    display: none;
+  }
 `;
 
 const Header = styled.div`
@@ -102,6 +106,8 @@ const AddButton = styled(FloatingButton)`
 `;
 
 function Note() {
+  let navigate = useNavigate();
+
   return (
     <Background>
       <Wrap>
@@ -138,7 +144,11 @@ function Note() {
         </Content>
         <FloatingButtonContainer>
           <ShareButton />
-          <AddButton />
+          <AddButton
+            onClick={() => {
+              navigate("/note/:note_id/write");
+            }}
+          />
         </FloatingButtonContainer>
       </Wrap>
     </Background>
