@@ -191,6 +191,7 @@ function Post(props) {
       alert("내용을 1자 이상 입력해주세요!");
     } else {
       alert("노트에 붙이기 성공");
+      navigate("/note/:user_id");
     }
     setDisabled(false);
   };
