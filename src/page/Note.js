@@ -40,9 +40,13 @@ const Title = styled.div`
 `;
 
 const LoginButton = styled.button`
+  width: 70px;
   background-color: white;
   border: none;
   font-size: 16px;
+  &:hover {
+    background-color: #f5f5f5;
+  }
 `;
 
 const Introduce = styled.div`
