@@ -2,7 +2,11 @@ import styled from "styled-components";
 import addIcon from "../assets/addIcon.svg";
 import shareIcon from "../assets/shareIcon.svg";
 import paper_1 from "../assets/paper_1.png";
+import paper_3 from "../assets/paper_3.png";
+
 import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import data from "../example_data/note_user_id.json";
 
 const Background = styled.div`
   background-color: #fff1a8;
@@ -63,18 +67,31 @@ const Content = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  padding: 10px;
   width: 100%;
 `;
 
 const PostItBox = styled.div`
-  background-image: url(${paper_1});
+  background-image: url(${paper_3});
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
-  height: 250px;
+  height: 270px;
   margin: 20px;
   width: calc(40% - 10px);
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+`;
+
+const Text = styled.div`
+  margin-top: 30px;
+  margin-right: 180px;
+`;
+
+const Writer = styled.div`
+  margin-bottom: 30px;
+  margin-left: 150px;
 `;
 
 const FloatingButtonContainer = styled.div`
@@ -109,54 +126,62 @@ const AddButton = styled(FloatingButton)`
   background-position: center;
 `;
 
+function PostIt(props) {
+  return props.data.post_data.map((x, i) => {
+    return (
+      <PostItBox>
+        <Text>{x.content_text}</Text>
+        <Writer>{x.writer === "" ? "- 익명" : "- " + x.writer}</Writer>
+      </PostItBox>
+    );
+  });
+}
+
 function Note() {
   let navigate = useNavigate();
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  let [post, setPost] = useState(data);
 
-  return (
-    <Background>
-      <Wrap>
-        <Header>
-          <HeaderRow>
-            <Title>용순이의 노트</Title>
-            <LoginButton>로그인</LoginButton>
-          </HeaderRow>
-          <HeaderRow>
-            <Introduce>
-              용순이의 노트입니다. 포스트잇 많이 붙여주세요!
-            </Introduce>
-          </HeaderRow>
-        </Header>
-        <Line />
-        <Content>
-          <PostItBox />
-          <PostItBox />
-          <PostItBox />
-          <PostItBox />
+  useEffect(() => {
+    // 쿠키 가져오기
+    // 쿠키 있으면 setIsLoggedIn(true)
+    // 쿠키 없으면 setIsLoggedIn(false)
 
-          <PostItBox />
-          <PostItBox />
-          <PostItBox />
-          <PostItBox />
-          <PostItBox />
-          <PostItBox />
-          <PostItBox />
-          <PostItBox />
-          <PostItBox />
-          <PostItBox />
-          <PostItBox />
-          <PostItBox />
-        </Content>
-        <FloatingButtonContainer>
-          <ShareButton />
-          <AddButton
-            onClick={() => {
-              navigate("/note/:note_id/write");
-            }}
-          />
-        </FloatingButtonContainer>
-      </Wrap>
-    </Background>
-  );
+    // 로그인 하지 않았다고 가정
+    setIsLoggedIn(false);
+  });
+  if (!isLoggedIn) {
+    // 로그인 안한 상태
+    return (
+      <Background>
+        <Wrap>
+          <Header>
+            <HeaderRow>
+              <Title>용순이의 노트</Title>
+              <LoginButton>로그인</LoginButton>
+            </HeaderRow>
+            <HeaderRow>
+              <Introduce>
+                용순이의 노트입니다. 포스트잇 많이 붙여주세요!
+              </Introduce>
+            </HeaderRow>
+          </Header>
+          <Line />
+          <Content>
+            <PostIt data={post}></PostIt>
+          </Content>
+          <FloatingButtonContainer>
+            <ShareButton />
+            <AddButton
+              onClick={() => {
+                navigate("/note/:note_id/write");
+              }}
+            />
+          </FloatingButtonContainer>
+        </Wrap>
+      </Background>
+    );
+  }
 }
 
 export default Note;

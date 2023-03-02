@@ -1,0 +1,30 @@
+{
+  "post_data" : 
+  [
+    {"post_id": 1,
+    "anonymous": true,
+    "writer": "",
+    "content_text": "test1"},
+
+    {"post_id": 2,
+    "anonymous": false,
+    "writer": "작성자1",
+    "content_text": "test2"},
+
+    {"post_id": 3,
+    "anonymous": true,
+    "writer": "",
+    "content_text": "test3"},
+
+    {"post_id": 4,
+    "anonymous": true,
+    "writer": "",
+    "content_text": "test4"},
+
+    {"post_id": 5,
+    "anonymous": false,
+    "writer": "작성자2",
+    "content_text": "test5"}
+ ]
+    
+}
