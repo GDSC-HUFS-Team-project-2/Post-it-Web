@@ -1,6 +1,7 @@
 import styled, { css } from "styled-components";
 import React, { useState } from "react";
 import Button from "../components/Button";
+import { useNavigate } from "react-router-dom";
 
 const Background = styled.div`
   background-color: #fff1a8;
@@ -41,7 +42,6 @@ const CancelButton = styled.button`
   background-color: white;
   border: none;
   font-size: 16px;
-  font-weight: bold;
   &:hover {
     background-color: #f5f5f5;
   }
@@ -70,7 +70,7 @@ const Content = styled.div`
 const ContentInput = styled.textarea`
   width: 460px;
   height: 150px;
-  margin-left: 30px;
+  margin-right: 20px;
   margin-top: 20px;
   font-size: 15px;
   padding: 30px;
@@ -84,6 +84,11 @@ const ContentInput = styled.textarea`
   ::placeholder {
     color: gray;
   }
+`;
+const Count = styled.div`
+  font-size: 1rem;
+  margin: 5px;
+  margin-left: 430px;
 `;
 
 const AnonymousBox = styled.div`
@@ -138,23 +143,29 @@ const WriterInput = styled.input`
   outline: none;
 `;
 
-const ButtonBox = styled.div`
-  display: flex;
-  justify-content: center;
+const Caution = styled.div`
+  font-size: 1rem;
+  font-family: Verdana;
+  width: 400px;
   padding: 10px;
-  padding-right: 30px;
+  color: #e73a3a;
+  text-align: left;
 `;
 
-const Count = styled.div`
-  font-size: 1rem;
-  margin: 5px;
-  margin-left: 470px;
+const ButtonBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 10px;
+  margin-left: 30px;
 `;
 
 function Post(props) {
+  let navigate = useNavigate();
+
   const [values, setValues] = useState({
     content: "",
-    isAnonymous: true,
+    isAnonymous: false,
     writer: "",
   });
   const [disabled, setDisabled] = useState(false);
@@ -176,18 +187,24 @@ function Post(props) {
     if (values.isAnonymous === false && values.writer === "") {
       alert("작성자의 이름을 기재해주세요!");
     }
+    if (values.content.length === 0) {
+      alert("내용을 1자 이상 입력해주세요!");
+    } else {
+      alert("노트에 붙이기 성공");
+      navigate("/note/:user_id");
+    }
     setDisabled(false);
   };
 
   const [toggle, setToggle] = useState(false);
   const clickedToggle = () => {
     setToggle((prev) => !prev);
-    setValues({ ...values, [values.isAnonymous]: toggle });
+    setValues({
+      ...values,
+      [values.isAnonymous]: toggle,
+      [values.writer]: values.writer,
+    });
   };
-
-  function Register() {
-    alert("노트에 붙이기 성공");
-  }
 
   return (
     <Background>
@@ -195,7 +212,13 @@ function Post(props) {
         <Header>
           <HeaderRow>
             <Title>포스트잇 작성하기</Title>
-            <CancelButton>취소</CancelButton>
+            <CancelButton
+              onClick={() => {
+                navigate("/note/:user_id");
+              }}
+            >
+              취소
+            </CancelButton>
           </HeaderRow>
           <HeaderRow>
             <Introduce>To. 용순</Introduce>
@@ -216,7 +239,11 @@ function Post(props) {
             <Count>{values.content.length} / 100</Count>
             <AnonymousBox>
               <AnonymousRow>
-                <ToggleBtn onClick={clickedToggle} toggle={toggle}>
+                <ToggleBtn
+                  type="button"
+                  onClick={clickedToggle}
+                  toggle={toggle}
+                >
                   <Circle toggle={toggle} />
                 </ToggleBtn>
                 <h3>익명으로 설정&nbsp;&nbsp;</h3>
@@ -239,11 +266,14 @@ function Post(props) {
               </AnonymousRow>
             </AnonymousBox>
             <ButtonBox>
-              <Button
-                type="submit"
-                disabled={disabled}
-                onClick={() => Register()}
-              >
+              {values.content.length === 0 ? (
+                <Caution>내용을 1자이상 입력해주세요</Caution>
+              ) : values.isAnonymous === false && values.writer === "" ? (
+                <Caution>작성자님의 별명/이름을 입력해주세요!</Caution>
+              ) : (
+                <Caution>&nbsp;</Caution>
+              )}
+              <Button type="button" disabled={disabled}>
                 노트에 붙이기
               </Button>
             </ButtonBox>
