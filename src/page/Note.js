@@ -169,7 +169,6 @@ function ClipboardCopy(props) {
       alert("클립보드에 복사되었습니다.");
     }
   };
-  console.log(props);
   return <ShareButton onClick={() => doCopy(props.url)}></ShareButton>;
 }
 
@@ -186,7 +185,6 @@ function Note() {
 
     // 로그인 하지 않았다고 가정
     setIsLoggedIn(false);
-    console.log(location.pathname);
   }, [location]);
   if (!isLoggedIn) {
     // 로그인 안한 상태
