@@ -1,0 +1,123 @@
+.threehalf {
+  /*make_note, edit_note, make_success 전용*/
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.yellowBackground {
+  /*make_note, edit_note, make_success 전용*/
+  background-color: #FFF1A8;
+  ;
+}
+
+.top {
+  padding: 5vh;
+  text-align: center;
+  width: auto;
+  display: block;
+  margin: auto;
+  grid-auto-rows: 1fr auto 1fr;
+
+}
+
+.right {
+  display: grid;
+  grid-template-rows: auto 1fr auto 1fr;
+  height: 100vh;
+}
+
+.h1 {
+  font-size: 300%;
+}
+
+.h1AfterLogin {
+  font-family: "godic";
+  font-size: 3rem;
+  margin: 0;
+  font-weight: 800;
+}
+
+.center {
+  text-align: center;
+}
+
+.under {
+  display: block;
+  bottom: 10;
+  padding: 2vh;
+  text-align: center;
+
+}
+
+.noteowner {
+  padding-top: 10vh;
+  text-align: left;
+  padding-left: 10%;
+}
+
+.textbox {
+  width: 80%;
+  height: 6vh;
+  font-size: 120%;
+  font-family: "godic";
+  border-radius: 10px;
+  transition: 1s;
+  border-style: hidden;
+  border-bottom-color: black;
+  font-weight: 500;
+}
+
+.textbox:hover {
+  background-color: #FFE27A;
+}
+
+.noteintroduce {
+  padding-top: 12vh;
+  text-align: center;
+  padding-left: 0%;
+}
+
+.button {
+  font-size: 200%;
+  background-color: #FFE27A;
+  color: black;
+  width: 100%;
+  height: 7vh;
+  border-radius: 10px;
+  border-style: hidden;
+  transition: 1s;
+  font-family: "godic";
+  font-weight: 600;
+
+}
+
+.button:hover {
+  background: #ffc800;
+  height: 10vh;
+}
+
+@media all and (max-width:1023px) {
+
+  /*모바일, 테블릿 세로*/
+  .half {
+    display: grid;
+    grid-template-columns: 0fr 1fr;
+  }
+
+  .threehalf {
+    display: grid;
+    grid-template-columns: 0fr 1fr 0fr;
+  }
+
+  h1 {
+    font-family: "godic";
+    font-size: 600%;
+    margin: 0;
+  }
+
+  h2 {
+    font-family: "godic";
+    font-size: 300%;
+    margin: 0;
+  }
+}
