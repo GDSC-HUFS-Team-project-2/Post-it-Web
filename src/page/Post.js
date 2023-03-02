@@ -146,9 +146,10 @@ const WriterInput = styled.input`
 const Caution = styled.div`
   font-size: 1rem;
   font-family: Verdana;
-  margin-right: 330px;
-  margin-bottom: 10px;
+  width: 400px;
+  padding: 10px;
   color: #e73a3a;
+  text-align: left;
 `;
 
 const ButtonBox = styled.div`
@@ -266,6 +267,8 @@ function Post(props) {
             <ButtonBox>
               {values.content.length === 0 ? (
                 <Caution>내용을 1자이상 입력해주세요</Caution>
+              ) : values.isAnonymous === false && values.writer === "" ? (
+                <Caution>작성자님의 별명/이름을 입력해주세요!</Caution>
               ) : (
                 <Caution>&nbsp;</Caution>
               )}
