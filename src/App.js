@@ -14,10 +14,11 @@ import styles from "./Login.module.css";
 import homestyles from "./Home.module.css";
 import ss from "./SignUpSuccess.module.css";
 import SignUp from "./SignUp";
-import Home from "./Home";
+
 
 const Note = lazy(() => import("./page/Note.js"));
 const Post = lazy(() => import("./page/Post.js"));
+const Home = lazy(() => import("./page/Home.js"));
 
 function SignUpSuccess() {
   return (
@@ -50,11 +51,15 @@ export default function App() {
     <div className="App">
       <Suspense fallback={<div>loading...</div>}>
         <Routes>
+          <Route path="/note/:home" element={<Home />}></Route>
           <Route path="/note/:user_id" element={<Note />}></Route>
           <Route path="/note/:note_id/write" element={<Post />}></Route>
           <Route path="*" element={<div>404</div>}></Route>
         </Routes>
       </Suspense>
     </div>
+
+ 
+
   );
 }
