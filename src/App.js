@@ -48,6 +48,17 @@ export default function App() {
       </Suspense>
 
     </div>
+<BrowserRouter>
+    <div>
+      <header>
+        <Home>
+          <Routes>
+        <Route exact path="/" element={SignUp}/>
+        <Route path="/signup" element={SignUp}/>
+      </Routes>
+          </Home>
+      </header>
+</div>
 </BrowserRouter>
   );
 }
