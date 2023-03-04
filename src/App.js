@@ -8,12 +8,18 @@ import {
   Outlet,
   Link,
 } from "react-router-dom";
+import { render } from "react-dom";
 import { lazy, Suspense } from "react";
 import React from "react";
 import styles from "./Login.module.css";
 import homestyles from "./Home.module.css";
 import ss from "./SignUpSuccess.module.css";
 import SignUp from "./SignUp";
+import EditNote from "./routes/EditNote";
+import MakeNote from "./routes/MakeNote";
+import MakeSuccess from "./routes/MakeSuccess";
+import EditSuccess from "./routes/EditSuccess";
+
 
 
 const Note = lazy(() => import("./page/Note.js"));
@@ -55,6 +61,11 @@ export default function App() {
           <Route path="/note/:user_id" element={<Note />}></Route>
           <Route path="/note/:note_id/write" element={<Post />}></Route>
           <Route path="*" element={<div>404</div>}></Route>
+          <Route path="/" element={<App />} />
+          <Route path="EditNote" element={<EditNote />} />
+          <Route path="MakeNote" element={<MakeNote />} />
+          <Route path="MakeSuccess" element={<MakeSuccess />} />
+          <Route path="EditSuccess" element={<EditSuccess />} />
         </Routes>
       </Suspense>
     </div>
