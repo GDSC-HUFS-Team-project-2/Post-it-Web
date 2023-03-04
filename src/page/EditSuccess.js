@@ -15,27 +15,18 @@ function Top(props){
 
 function Center(){
   return <div id="center">
-    <div><h2 class="h2div">노트의 주인</h2></div>
-    <input type="textbox" className="textbox" maxLength="12" placeholder="별명/이름을 입력해주세요." onChange={
-      (ele)=>{
-        console.log(ele.target.value.length)
-      }
-    }/>
-    <span>{0}/12</span>
     <div></div>
-    <div><h2 class="h2div">노트 소개</h2></div>
-    <input type="textbox" className="textbox" maxLength="30" placeholder="나의 노트를 소개해보세요." onChange={
-      (ele)=>{
-        console.log(ele.target.value.length)
-      }
-    } />
-    <span>{0}/30</span>
+    <div>
+      <h2 id="h2success">수정 완료!</h2>
+      <h3>수정된 노트를 확인하러 가볼까요?</h3>
+    </div>
+    <div></div>
+    
   </div>
 }
 
 function Under(props){
   return <div id="under">
-
     <div></div>
     <div></div>
     <div><Link to={props.gogo}><button>{props.text}</button></Link></div>
@@ -47,9 +38,9 @@ function App() {
     <div className="threeHalf">
       <div className="yellowBG"></div>
       <div id="UI">
-          <Top title="내 노트 수정하기" undo="../"></Top>
+          <Top title="내 노트 만들기" undo="/EditNote"></Top>
           <Center></Center>
-          <Under text="노트 수정하기" gogo="/EditSuccess"></Under>
+          <Under text="노트 보러가기" gogo=""></Under>
       </div>
       <div className="yellowBG"></div>
     </div>
