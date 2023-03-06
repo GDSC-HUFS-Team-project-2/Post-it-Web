@@ -12,10 +12,6 @@ import {
 import { render } from "react-dom";
 import { lazy, Suspense } from "react";
 import React from "react";
-import styles from "./Login.module.css";
-import homestyles from "./Home.module.css";
-import ss from "./SignUpSuccess.module.css";
-import SignUp from "./SignUp";
 import EditNote from "./page/EditNote";
 import MakeNote from "./page/MakeNote";
 import MakeSuccess from "./page/MakeSuccess";
@@ -27,6 +23,7 @@ const Note = lazy(() => import("./page/Note.js"));
 const Post = lazy(() => import("./page/Post.js"));
 const Home = lazy(() => import("./page/Home.js"));
 const SignUp = lazy(() => import("./page/SignUp.js"));
+const Login = lazy(() => import("./page/Login.js"));
 
 
 export default function App() {
