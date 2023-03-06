@@ -1,3 +1,4 @@
+
 import logo from "./logo.svg";
 import "./App.css";
 import {
@@ -8,9 +9,17 @@ import {
   Outlet,
   Link,
 } from "react-router-dom";
+import { render } from "react-dom";
 import { lazy, Suspense } from "react";
 import React from "react";
-
+import styles from "./Login.module.css";
+import homestyles from "./Home.module.css";
+import ss from "./SignUpSuccess.module.css";
+import SignUp from "./SignUp";
+import EditNote from "./page/EditNote";
+import MakeNote from "./page/MakeNote";
+import MakeSuccess from "./page/MakeSuccess";
+import EditSuccess from "./page/EditSuccess";
 
 
 
@@ -31,6 +40,10 @@ export default function App() {
           <Route path="/note/:user_signup" element={<SignUp />}></Route>
           <Route path="/note/:note_id/write" element={<Post />}></Route>
           <Route path="*" element={<div>404</div>}></Route>
+          <Route path="EditNote" element={<EditNote />} />
+          <Route path="MakeNote" element={<MakeNote />} />
+          <Route path="MakeSuccess" element={<MakeSuccess />} />
+          <Route path="EditSuccess" element={<EditSuccess />} />
         </Routes>
       </Suspense>
     </div>
