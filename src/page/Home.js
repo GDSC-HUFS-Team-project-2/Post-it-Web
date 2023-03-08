@@ -22,8 +22,7 @@ const Button = styled.button`
   }
 `;
 
-export default function Home(){
-  let navigate=useNavigate();
+function Home(props){
   
 
 
@@ -38,22 +37,10 @@ export default function Home(){
         <div className={homestyles.center}>
         </div>
         <div className={homestyles.under}>
-          <Button
-              onClick={() => {
-                navigate("/note/:user_login");
-              }}
-            >
-              로그인
-            </Button>
+          <div><Link to={props.go1}><Button>{props.text1}</Button></Link></div>
         </div>
         <div className={homestyles.under}>
-          <Button
-              onClick={() => {
-                navigate("/note/:user_signup");
-              }}
-            >
-              회원가입
-            </Button>
+          <div><Link to={props.go2}><Button>{props.text2}</Button></Link></div>
           <p><Link to="/">개발자 소개</Link></p>
         </div>
 
@@ -62,3 +49,11 @@ export default function Home(){
     </div>
   )
 }
+function App(){
+  return(
+    <Home go1="/Login" text1="로그인" go2="/SignUp" text2="회원가입"></Home>
+    
+  );
+}
+
+export default App;

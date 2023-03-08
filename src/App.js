@@ -16,15 +16,16 @@ import EditNote from "./page/EditNote";
 import MakeNote from "./page/MakeNote";
 import MakeSuccess from "./page/MakeSuccess";
 import EditSuccess from "./page/EditSuccess";
+import Login from "./page/Login.js";
+import SignUp from "./page/SignUp.js";
+import SignUpSuccess from "./page/SignUpSuccess.js";
 
 
 
 const Note = lazy(() => import("./page/Note.js"));
 const Post = lazy(() => import("./page/Post.js"));
 const Home = lazy(() => import("./page/Home.js"));
-const SignUp = lazy(() => import("./page/SignUp.js"));
-const Login = lazy(() => import("./page/Login.js"));
-const SignUpSuccess = lazy(() => import("./page/SignUpSuccess.js"));
+
 
 export default function App() {
   return (
@@ -32,9 +33,9 @@ export default function App() {
       <Suspense fallback={<div>loading...</div>}>
         <Routes>
           <Route path="/note/:home" element={<Home />}></Route>
-          <Route path="/note/:user_login" element={<Login />}></Route>
-          <Route path="/note/:user_signup" element={<SignUp />}></Route>
-          <Route path="/note/:user_signupsuccess" element={<SignUpSuccess />}></Route>
+          <Route path="Login" element={<Login />}/>
+          <Route path="SignUp" element={<SignUp />}/>
+          <Route path="SignUpSuccess" element={<SignUpSuccess />}/>
           <Route path="/note/:user_id" element={<Note />}></Route>
           <Route path="/note/:note_id/write" element={<Post />}></Route>
           <Route path="*" element={<div>404</div>}></Route>

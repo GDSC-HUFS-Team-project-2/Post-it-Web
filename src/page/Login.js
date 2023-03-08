@@ -23,8 +23,7 @@ const Button = styled.button`
   }
 `;
 
-function Login(){
-  let navigate=useNavigate();
+function Login(props){
 
   return(
     <div className={styles.threehalf}>
@@ -32,7 +31,7 @@ function Login(){
       <div className={styles.right}>
         <div className={styles.top}>
           <div id="menuBar">
-        <div><Link to="../"><button id="undo"><img src={undo}></img></button></Link></div>
+        <div><Link to={props.undo}><button id="undo"><img src={undo}></img></button></Link></div>
         <h1 className={styles.h1AfterLogin}>로그인</h1>
         <div></div>
     </div>
@@ -59,22 +58,10 @@ function Login(){
           </form>
         </div>
         <div className={styles.under}>
-          <Button
-              onClick={() => {
-                navigate("MakeNote");
-              }}
-            >
-              로그인
-            </Button>
+          <div><Link to={props.go1}><Button>{props.text1}</Button></Link></div>
         </div>
         <div className={styles.under}>
-          <Button
-              onClick={() => {
-                navigate("/note/:user_signup");
-              }}
-            >
-              회원가입
-            </Button>
+          <div><Link to={props.go2}><Button>{props.text2}</Button></Link></div>
         </div>
       </div>
       <div className={styles.yellowBackground}></div> 
@@ -82,4 +69,9 @@ function Login(){
   )
 };
 
-export default Login;
+function App(){
+  return(
+<Login go1="/MakeNote" text1="로그인" go2="/SignUp" text2="회원가입" undo="../"></Login>
+  );
+}
+export default App;

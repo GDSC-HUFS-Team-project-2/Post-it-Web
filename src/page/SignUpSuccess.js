@@ -24,8 +24,8 @@ const Button = styled.button`
   }
 `;
 
-export default function SignUpSuccess() {
-  let navigate=useNavigate();
+function SignUpSuccess(props) {
+
 
   return (
     <div className={ss.threehalf}>
@@ -33,7 +33,7 @@ export default function SignUpSuccess() {
       <div className={ss.right}>
         <div className={styles.top}>
           <div id="menuBar">
-        <div><Link to="../"><button id="undo"><img src={undo}></img></button></Link></div>
+        <div><Link to={props.undo}><button id="undo"><img src={undo}></img></button></Link></div>
         <h1 className={styles.h1AfterLogin}>회원가입</h1>
         <div></div>
     </div>
@@ -42,16 +42,18 @@ export default function SignUpSuccess() {
           <h2 className={ss.noteintroduce}>회원가입 완료!</h2>
         </div>
         <div className={ss.under}>
-          <Button
-              onClick={() => {
-                navigate("/note/:user_login");
-              }}
-            >
-              로그인 하러가기
-            </Button>
+          <div><Link to={props.go1}><Button>{props.text1}</Button></Link></div>
         </div>
       </div>
       <div className={ss.yellowBackground}></div>
     </div>
   );
 }
+
+function App(){
+  return(
+<SignUpSuccess go1="/Login" text1="로그인 하러가기" undo="../"></SignUpSuccess>
+  );
+}
+
+export default App;
