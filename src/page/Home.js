@@ -2,6 +2,7 @@ import homestyles from "../Home.module.css"
 import { useNavigate } from "react-router-dom";
 import {Link} from 'react-router-dom'
 import styled, { css } from "styled-components";
+import post_it from "../assets/post_it.png"
 
 
 const Button = styled.button`
@@ -23,6 +24,7 @@ const Button = styled.button`
 
 export default function Home(){
   let navigate=useNavigate();
+  
 
 
   return(
@@ -30,7 +32,7 @@ export default function Home(){
       <div className={homestyles.yellowBackground}></div>
       <div className={homestyles.right}>
         <div className={homestyles.top}>
-          <img src="img/post_it.png" height="200px" width="200px" />
+          <img src={post_it} height="200px" width="200px" />
           <h1 className={homestyles.h1}>Post - it</h1>
         </div>
         <div className={homestyles.center}>
@@ -52,7 +54,7 @@ export default function Home(){
             >
               회원가입
             </Button>
-          <p><Link to="/signup">개발자 소개</Link></p>
+          <p><Link to="/">개발자 소개</Link></p>
         </div>
 
       </div>
