@@ -52,7 +52,7 @@ function SignUpSuccess(props) {
 
 function App(){
   return(
-<SignUpSuccess go1="/Login" text1="로그인 하러가기" undo="../"></SignUpSuccess>
+<SignUpSuccess go1="/login" text1="로그인 하러가기" undo="../"></SignUpSuccess>
   );
 }
 
