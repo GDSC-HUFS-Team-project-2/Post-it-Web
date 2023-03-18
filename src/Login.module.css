@@ -38,12 +38,12 @@
 .under {
   position: table;
   bottom: 0;
-  padding: 3vh;
+  padding: 2vh;
   
 }
 
 .noteowner {
-  padding-top: 10vh;
+  padding-top: 5vh;
   text-align: left;
   padding-left: 10%;
 }
@@ -53,9 +53,10 @@
   height: 6vh;
   font-size: 120%;
   font-family: "godic";
-  border-radius: 10px;
   transition: 1s;
-  border-style: hidden;
+  border-top-style: hidden;
+  border-left-style: hidden;
+  border-right-style: hidden;
   border-bottom-color: black;
   font-weight: 500;
 }

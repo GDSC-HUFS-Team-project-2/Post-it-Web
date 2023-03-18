@@ -32,9 +32,9 @@ export default function App() {
     <div className="App">
       <Suspense fallback={<div>loading...</div>}>
         <Routes>
-          <Route path="/note/:home" element={<Home />}></Route>
-          <Route path="Login" element={<Login />}/>
-          <Route path="SignUp" element={<SignUp />}/>
+          <Route path="/Home" element={<Home />}></Route>
+          <Route path="/login" element={<Login />}/>
+          <Route path="/signup" element={<SignUp />}/>
           <Route path="SignUpSuccess" element={<SignUpSuccess />}/>
           <Route path="/note/:user_id" element={<Note />}></Route>
           <Route path="/note/:note_id/write" element={<Post />}></Route>

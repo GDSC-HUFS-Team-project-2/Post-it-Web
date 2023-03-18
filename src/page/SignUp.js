@@ -5,13 +5,64 @@ import styled, { css } from "styled-components";
 import undo from './undo.png';
 import { Link } from "react-router-dom";
 
+const Background = styled.div`
+  background-color: #fff1a8;
+  height: 100vh;
+`;
 
+const Wrap = styled.div`
+  background-color: white;
+  height: 100%;
+  margin: auto;
+  width: 600px;
+  position: relative;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  ::-webkit-scrollbar {
+    display: none;
+  }
+`;
+
+const Header = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+`;
+
+const HeaderRow = styled.div`
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+`;
+
+const Title = styled.div`
+  padding-left: 80px;
+  margin-left:40px;
+  font-size: 30px;
+  font-weight: bold;
+`;
 
 const Button = styled.button`
   font-size: 200%;
   background-color: #FFE27A;
   color: black;
-  width: 100%;
+  width: 87%;
+  height: 7vh;
+  border-radius: 10px;
+  border-style: hidden;
+  transition: 1s;
+  font-family: "godic";
+  font-weight: 600;
+  &:hover {
+  background: #ffc800;
+  height: 10vh;
+  }
+`;
+const Button2 = styled.button`
+  font-size: 150%;
+  background-color:#ffffff;
+  color: black;
+  width: 87%;
   height: 7vh;
   border-radius: 10px;
   border-style: hidden;
@@ -26,17 +77,20 @@ const Button = styled.button`
 function SignUp(props){
 
 
+  
   return(
-      <div className={styles.threehalf}>
-      <div className={styles.yellowBackground}></div>
-      <div className={styles.right}>
-        <div className={styles.top}>
-          <div id="menuBar">
+    <Background>
+      <Wrap>
+      <Header>
+          <HeaderRow>
+          <div id="menuBar2">
         <div><Link to={props.undo}><button id="undo"><img src={undo}></img></button></Link></div>
-        <h1 className={styles.h1AfterLogin}>회원가입</h1>
+        <div>&nbsp;</div><Title>회원가입</Title>
         <div></div>
     </div>
-        </div>
+
+        </HeaderRow>
+        </Header>
         <div className={styles.center}>
           <h2 className={styles.noteowner}>이메일</h2>
           <form>
@@ -57,21 +111,22 @@ function SignUp(props){
           </p>
           </form>
         </div>
+        <br></br>
         <div className={styles.under}>
           <div><Link to={props.go2}><Button>{props.text2}</Button></Link></div>
         </div>
         <div className={styles.under}>
-          <div><Link to={props.go1}><Button>{props.text1}</Button></Link></div>
+          <div><Link to={props.go1}><Button2>{props.text1}</Button2></Link></div>
         </div>
-      </div>
-      <div className={styles.yellowBackground}></div> 
-    </div>
+
+    </Wrap>
+    </Background>
   )
 }
 
 function App(){
   return(
-    <SignUp go1="/Login" text1="로그인" go2="/SignUpSuccess" text2="회원가입" undo="../"></SignUp>
+    <SignUp go1="/login" text1="로그인" go2="/SignUpSuccess" text2="회원가입" undo="../"></SignUp>
   );
 }
 export default App;

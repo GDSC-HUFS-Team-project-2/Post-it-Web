@@ -44,7 +44,7 @@
 .under {
   display: block;
   bottom: 10;
-  padding: 2vh;
+  padding:15vh;
   text-align: center;
 
 }
@@ -72,7 +72,7 @@
 }
 
 .noteintroduce {
-  padding-top: 12vh;
+  padding-top: 25vh;
   text-align: center;
   padding-left: 0%;
 }
