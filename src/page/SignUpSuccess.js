@@ -23,11 +23,31 @@ const Wrap = styled.div`
     display: none;
   }
 `;
+
+const Header = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+`;
+
+const HeaderRow = styled.div`
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+`;
+
+const Title = styled.div`
+  padding-left: 80px;
+  margin-left:40px;
+  font-size: 30px;
+  font-weight: bold;
+`;
 const Button = styled.button`
+  margin-top:15vh;
   font-size: 200%;
   background-color: #FFE27A;
   color: black;
-  width: 100%;
+  width: 87%;
   height: 7vh;
   border-radius: 10px;
   border-style: hidden;
@@ -46,22 +66,22 @@ function SignUpSuccess(props) {
   return (
     <Background>
       <Wrap>
+        <Header>
+          <HeaderRow>
 
-      <div className={ss.right}>
-        <div className={styles.top}>
-          <div id="menuBar">
+          <div id="menuBar2">
         <div><Link to={props.undo}><button id="undo"><img src={undo}></img></button></Link></div>
-        <h1 className={styles.h1AfterLogin}>회원가입</h1>
+        <div>&nbsp;</div><Title>회원가입</Title>
         <div></div>
     </div>
-        </div>
+      </HeaderRow>
+      </Header>
         <div className={ss.center}>
           <h2 className={ss.noteintroduce}>회원가입 완료!</h2>
         </div>
-        <div className={ss.under}>
           <div><Link to={props.go1}><Button>{props.text1}</Button></Link></div>
-        </div>
-      </div>
+        
+
 
     </Wrap>
     </Background>

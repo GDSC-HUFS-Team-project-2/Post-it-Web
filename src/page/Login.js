@@ -4,6 +4,7 @@ import styled, { css } from "styled-components";
 import undo from './undo.png';
 import { Link } from "react-router-dom";
 import data from "../example_data/note_user_id.json";
+import './style.css';
 
 const Background = styled.div`
   background-color: #fff1a8;
@@ -36,25 +37,35 @@ const HeaderRow = styled.div`
 `;
 
 const Title = styled.div`
+  padding-left: 80px;
+  margin-left:50px;
   font-size: 30px;
   font-weight: bold;
 `;
 
-const LoginButton = styled.button`
-  width: 70px;
-  background-color: white;
-  border: none;
-  font-size: 16px;
-  &:hover {
-    background-color: #f5f5f5;
-  }
-`;
 
 const Button = styled.button`
   font-size: 200%;
   background-color: #FFE27A;
   color: black;
-  width: 100%;
+  width: 87%;
+  height: 7vh;
+  border-radius: 10px;
+  border-style: hidden;
+  transition: 1s;
+  font-family: "godic";
+  font-weight: 600;
+  &:hover {
+  background: #ffc800;
+  height: 10vh;
+  }
+`;
+
+const Button2 = styled.button`
+  font-size: 150%;
+  background-color:#ffffff;
+  color: black;
+  width: 87%;
   height: 7vh;
   border-radius: 10px;
   border-style: hidden;
@@ -74,11 +85,9 @@ function Login(props){
       <Wrap>
         <Header>
           <HeaderRow>
-          <div id="menuBar">
+          <div id="menuBar2">
         <div><Link to={props.undo}><button id="undo"><img src={undo}></img></button></Link></div>
-        <div>
-        <Title>로그인</Title>
-        </div>
+        <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div><Title>로그인</Title>
         <div></div>
     </div>
           
@@ -104,11 +113,12 @@ function Login(props){
           </p>
           </form>
         </div>
+        <br></br>
         <div className={styles.under}>
           <div><Link to={props.go1}><Button>{props.text1}</Button></Link></div>
         </div>
         <div className={styles.under}>
-          <div><Link to={props.go2}><Button>{props.text2}</Button></Link></div>
+          <div><Link to={props.go2}><Button2>{props.text2}</Button2></Link></div>
         </div>
       
 
