@@ -67,6 +67,9 @@ html, body{
   grid-template-rows: 1fr 1fr 1fr;
 }
 
+.error{
+  color: red;
+}
 h1{
   font-size: calc(20px + 3vmin);
   font-family: "고딕14";
