@@ -3,8 +3,52 @@ import { useNavigate } from "react-router-dom";
 import styled, { css } from "styled-components";
 import undo from './undo.png';
 import { Link } from "react-router-dom";
+import data from "../example_data/note_user_id.json";
 
+const Background = styled.div`
+  background-color: #fff1a8;
+  height: 100vh;
+`;
 
+const Wrap = styled.div`
+  background-color: white;
+  height: 100%;
+  margin: auto;
+  width: 600px;
+  position: relative;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  ::-webkit-scrollbar {
+    display: none;
+  }
+`;
+
+const Header = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+`;
+
+const HeaderRow = styled.div`
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+`;
+
+const Title = styled.div`
+  font-size: 30px;
+  font-weight: bold;
+`;
+
+const LoginButton = styled.button`
+  width: 70px;
+  background-color: white;
+  border: none;
+  font-size: 16px;
+  &:hover {
+    background-color: #f5f5f5;
+  }
+`;
 
 const Button = styled.button`
   font-size: 200%;
@@ -26,17 +70,20 @@ const Button = styled.button`
 function Login(props){
 
   return(
-    <div className={styles.threehalf}>
-      <div className={styles.yellowBackground}></div>
-      <div className={styles.right}>
-        <div className={styles.top}>
+    <Background>
+      <Wrap>
+        <Header>
+          <HeaderRow>
           <div id="menuBar">
         <div><Link to={props.undo}><button id="undo"><img src={undo}></img></button></Link></div>
-        <h1 className={styles.h1AfterLogin}>로그인</h1>
+        <div>
+        <Title>로그인</Title>
+        </div>
         <div></div>
     </div>
           
-        </div>
+        </HeaderRow>
+        </Header>
         <div className={styles.center}>
           <h2 className={styles.noteowner}>이메일</h2>
           <form>
@@ -63,15 +110,17 @@ function Login(props){
         <div className={styles.under}>
           <div><Link to={props.go2}><Button>{props.text2}</Button></Link></div>
         </div>
-      </div>
-      <div className={styles.yellowBackground}></div> 
-    </div>
+      
+
+ 
+    </Wrap>
+    </Background>
   )
 };
 
 function App(){
   return(
-<Login go1="/MakeNote" text1="로그인" go2="/SignUp" text2="회원가입" undo="../"></Login>
+<Login go1="/MakeNote" text1="로그인" go2="/signup" text2="회원가입" undo="../"></Login>
   );
 }
 export default App;

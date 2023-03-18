@@ -4,7 +4,23 @@ import {Link} from 'react-router-dom'
 import styled, { css } from "styled-components";
 import post_it from "../assets/post_it.png"
 
+const Background = styled.div`
+  background-color: #fff1a8;
+  height: 100vh;
+`;
 
+const Wrap = styled.div`
+  background-color: white;
+  height: 100%;
+  margin: auto;
+  width: 600px;
+  position: relative;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  ::-webkit-scrollbar {
+    display: none;
+  }
+`;
 const Button = styled.button`
   font-size: 200%;
   background-color: #FFE27A;
@@ -27,8 +43,9 @@ function Home(props){
 
 
   return(
-    <div className={homestyles.threehalf}>
-      <div className={homestyles.yellowBackground}></div>
+    <Background>
+      <Wrap>
+
       <div className={homestyles.right}>
         <div className={homestyles.top}>
           <img src={post_it} height="200px" width="200px" />
@@ -45,13 +62,14 @@ function Home(props){
         </div>
 
       </div>
-      <div className={homestyles.yellowBackground}></div> 
-    </div>
+
+    </Wrap>
+    </Background>
   )
 }
 function App(){
   return(
-    <Home go1="/Login" text1="로그인" go2="/SignUp" text2="회원가입"></Home>
+    <Home go1="/login" text1="로그인" go2="/signup" text2="회원가입"></Home>
     
   );
 }

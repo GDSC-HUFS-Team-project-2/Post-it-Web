@@ -6,7 +6,23 @@ import React, { useState } from "react";
 import undo from './undo.png';
 import styles from "../Login.module.css";
 
+const Background = styled.div`
+  background-color: #fff1a8;
+  height: 100vh;
+`;
 
+const Wrap = styled.div`
+  background-color: white;
+  height: 100%;
+  margin: auto;
+  width: 600px;
+  position: relative;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  ::-webkit-scrollbar {
+    display: none;
+  }
+`;
 const Button = styled.button`
   font-size: 200%;
   background-color: #FFE27A;
@@ -28,8 +44,9 @@ function SignUpSuccess(props) {
 
 
   return (
-    <div className={ss.threehalf}>
-      <div className={ss.yellowBackground}></div>
+    <Background>
+      <Wrap>
+
       <div className={ss.right}>
         <div className={styles.top}>
           <div id="menuBar">
@@ -45,8 +62,9 @@ function SignUpSuccess(props) {
           <div><Link to={props.go1}><Button>{props.text1}</Button></Link></div>
         </div>
       </div>
-      <div className={ss.yellowBackground}></div>
-    </div>
+
+    </Wrap>
+    </Background>
   );
 }
 
