@@ -38,7 +38,7 @@ function App() {
     <div className="threeHalf">
       <div className="yellowBG"></div>
       <div id="UI">
-          <Top title="내 노트 만들기" undo="/EditNote"></Top>
+          <Top title="내 노트 수정하기" undo="/EditNote"></Top>
           <Center></Center>
           <Under text="노트 보러가기" gogo=""></Under>
       </div>

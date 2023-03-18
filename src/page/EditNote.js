@@ -16,9 +16,14 @@ function Top(props){
 function Center(){
   return <div id="center">
     <div><h2 class="h2div">노트의 주인</h2></div>
-    <input type="textbox" className="textbox" maxLength="12" placeholder="별명/이름을 입력해주세요." onChange={
+    <input type="textbox" id="textbox1" class="textbox" maxLength="12" placeholder="별명/이름을 입력해주세요." onChange={
       (ele)=>{
         console.log(ele.target.value.length)
+        if (ele.target.value.length <= 0){
+          console.log("내용을 1자이상 입력해주세요")
+        } else if (ele.target.value.length >= 12){
+          console.log("모든 글자 수를 채웠습니다.")
+        }
       }
     }/>
     <span>{0}/12</span>
@@ -27,6 +32,11 @@ function Center(){
     <input type="textbox" className="textbox" maxLength="30" placeholder="나의 노트를 소개해보세요." onChange={
       (ele)=>{
         console.log(ele.target.value.length)
+        if (ele.target.value.length == 0){
+          console.log("내용을 1자이상 입력해주세요")
+        } else if (ele.target.value.length >= 30){
+          console.log("모든 글자 수를 채웠습니다.")
+        }
       }
     } />
     <span>{0}/30</span>
