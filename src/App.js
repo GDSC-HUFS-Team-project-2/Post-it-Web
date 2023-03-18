@@ -39,10 +39,10 @@ export default function App() {
           <Route path="/note/:user_id" element={<Note />}></Route>
           <Route path="/note/:note_id/write" element={<Post />}></Route>
           <Route path="*" element={<div>404</div>}></Route>
-          <Route path="EditNote" element={<EditNote />} />
-          <Route path="MakeNote" element={<MakeNote />} />
-          <Route path="MakeSuccess" element={<MakeSuccess />} />
-          <Route path="EditSuccess" element={<EditSuccess />} />
+          <Route path="/note/:user_id/edit" element={<EditNote />} />
+          <Route path="/note/:user_id/make" element={<MakeNote />} />
+          <Route path="/note/:user_id/make" element={<MakeSuccess />} />
+          <Route path="/note/:user_id/edit" element={<EditSuccess />} />
         </Routes>
       </Suspense>
     </div>
