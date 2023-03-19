@@ -16,6 +16,7 @@ import EditNote from "./page/EditNote";
 import MakeNote from "./page/MakeNote";
 import MakeSuccess from "./page/MakeSuccess";
 import EditSuccess from "./page/EditSuccess";
+import Home from "./page/Home.js";
 import Login from "./page/Login.js";
 import SignUp from "./page/SignUp.js";
 import SignUpSuccess from "./page/SignUpSuccess.js";
@@ -24,7 +25,7 @@ import SignUpSuccess from "./page/SignUpSuccess.js";
 
 const Note = lazy(() => import("./page/Note.js"));
 const Post = lazy(() => import("./page/Post.js"));
-const Home = lazy(() => import("./page/Home.js"));
+
 
 
 export default function App() {
@@ -32,7 +33,7 @@ export default function App() {
     <div className="App">
       <Suspense fallback={<div>loading...</div>}>
         <Routes>
-          <Route path="/Home" element={<Home />}></Route>
+          <Route path="/" element={<Home />}></Route>
           <Route path="/login" element={<Login />}/>
           <Route path="/signup" element={<SignUp />}/>
           <Route path="SignUpSuccess" element={<SignUpSuccess />}/>

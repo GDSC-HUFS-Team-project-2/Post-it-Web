@@ -4,7 +4,11 @@ import styled, { css } from "styled-components";
 import undo from './undo.png';
 import { Link } from "react-router-dom";
 import data from "../example_data/note_user_id.json";
+import { useEffect, useState } from "react";
 import './style.css';
+import axios from 'axios';
+
+
 
 const Background = styled.div`
   background-color: #fff1a8;
@@ -78,7 +82,51 @@ const Button2 = styled.button`
   }
 `;
 
+const Caution = styled.div`
+  font-size: 1rem;
+  font-family: Verdana;
+  width: 400px;
+  padding: 10px;
+  color: #e73a3a;
+  text-align: left;
+`;
+
+
 function Login(props){
+  const navigate=useNavigate();
+  
+  const [email,setEmail]=useState('');
+  const [pw,setPw]=useState("");
+
+  const checkUser=()=>{
+    //if(email===""||pw===""){
+      //<Caution>ID/PW를 다시 확인해주세요.</Caution>
+      //return;
+    //}
+    axios
+  .post('http://localhost:1337/api/auth/local', {
+    user_email: email,
+    user_pw:pw
+  })
+  .then(response => {
+    // Handle success.
+    console.log('Well done!');
+    console.log('User token', response.data.jwt);
+    localStorage.setItem("token",response.data.jwt);
+    navigate('/',{replace:true});
+  })
+  .catch(error => {
+    // Handle error.
+    console.log('An error occurred:', error.response);
+  });
+  }
+
+  useEffect(()=>{
+    if (localStorage.getItem("token")){
+      navigate('/',{replace:true});
+    }
+  })
+ 
 
   return(
     <Background>
@@ -97,40 +145,39 @@ function Login(props){
           <h2 className={styles.noteowner}>이메일</h2>
           <form>
           <p>
-          <input type="text" className={styles.textbox} placeholder='이메일을 입력해주세요.' onChange={
-      (ele)=>{
-        console.log(ele.target.value.length)
-      }
-    }/>
+          <input type="text" className={styles.textbox} placeholder='이메일을 입력해주세요.' value={email} onChange={(event)=>{
+            setEmail(event.target.value);
+          }}/>
           </p>
           <h2 className={styles.noteintroduce}>비밀번호</h2>
           <p>
-          <input type="text" className={styles.textbox} placeholder='비밀번호를 입력해주세요.' onChange={
-      (ele)=>{
-        console.log(ele.target.value.length)
-      }
-    }/>
+          <input type="text" className={styles.textbox} placeholder='비밀번호를 입력해주세요.' value={pw} onChange={(event)=>{
+            setPw(event.target.value);
+          }}/>
           </p>
           </form>
         </div>
         <br></br>
         <div className={styles.under}>
-          <div><Link to={props.go1}><Button>{props.text1}</Button></Link></div>
+          <div><Link to={props.go1}>
+            <Button onclick={()=>{checkUser();}}>
+              {props.text1}
+            </Button>
+            </Link></div>
         </div>
         <div className={styles.under}>
           <div><Link to={props.go2}><Button2>{props.text2}</Button2></Link></div>
         </div>
-      
-
- 
     </Wrap>
     </Background>
   )
+  
 };
 
 function App(){
   return(
-<Login go1="/MakeNote" text1="로그인" go2="/signup" text2="회원가입" undo="../"></Login>
+<Login go1="/note/:user_id/make" text1="로그인" go2="/signup" text2="회원가입" undo="../"></Login>
   );
 }
+
 export default App;
