@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 import styled, { css } from "styled-components";
 import undo from './undo.png';
 import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import axios from 'axios';
 
 const Background = styled.div`
   background-color: #fff1a8;
@@ -75,8 +77,31 @@ const Button2 = styled.button`
   }
 `;
 function SignUp(props){
+  const navigate=useNavigate();
 
+  const [email,setEmail]=useState('');
+  const [pw,setPw]=useState("");
 
+  const register=()=>{
+    axios
+  .post('http://localhost:1337/api/auth/local/register', {
+    user_email: email,
+    user_pw:pw,
+  })
+  .then(response => {
+    // Handle success.
+    console.log('Well done!');
+    console.log('User profile', response.data.user);
+    console.log('User token', response.data.jwt);
+    localStorage.setItem("token",response.data.jwt);
+    navigate('/',{replace:true});
+    
+  })
+  .catch(error => {
+    // Handle error.
+    console.log('An error occurred:', error.response);
+  });
+  }
   
   return(
     <Background>
@@ -95,18 +120,12 @@ function SignUp(props){
           <h2 className={styles.noteowner}>이메일</h2>
           <form>
           <p>
-          <input type="text" className={styles.textbox} placeholder='이메일을 입력해주세요.' onChange={
-      (ele)=>{
-        console.log(ele.target.value.length)
-      }
+          <input type="text" className={styles.textbox} placeholder='이메일을 입력해주세요.' value={email} onChange={(event)=>{ setEmail(event.target.value);}   
     }/>
           </p>
           <h2 className={styles.noteintroduce}>비밀번호</h2>
           <p>
-          <input type="text" className={styles.textbox} placeholder='비밀번호를 입력해주세요.' onChange={
-      (ele)=>{
-        console.log(ele.target.value.length)
-      }
+          <input type="text" className={styles.textbox} placeholder='비밀번호를 입력해주세요.' value={pw} onChange={(event)=>{setPw(event.target.value);}
     }/>
           </p>
           </form>
@@ -116,7 +135,9 @@ function SignUp(props){
           <div><Link to={props.go2}><Button>{props.text2}</Button></Link></div>
         </div>
         <div className={styles.under}>
-          <div><Link to={props.go1}><Button2>{props.text1}</Button2></Link></div>
+          <div><Link to={props.go1}><Button2 onClick={()=>{
+            register();
+          }}>{props.text1}</Button2></Link></div>
         </div>
 
     </Wrap>

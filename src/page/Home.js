@@ -3,6 +3,11 @@ import { useNavigate } from "react-router-dom";
 import {Link} from 'react-router-dom'
 import styled, { css } from "styled-components";
 import post_it from "../assets/post_it.png"
+import axios from "axios";
+
+axios.get("http://localhost:1337/api/restaurants").then((response) => {
+  console.log(response);
+});
 
 const Background = styled.div`
   background-color: #fff1a8;
@@ -25,7 +30,7 @@ const Button = styled.button`
   font-size: 200%;
   background-color: #FFE27A;
   color: black;
-  width: 100%;
+  width: 87%;
   height: 7vh;
   border-radius: 10px;
   border-style: hidden;
