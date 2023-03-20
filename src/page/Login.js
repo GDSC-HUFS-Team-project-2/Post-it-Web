@@ -1,10 +1,9 @@
 import styles from "../Login.module.css";
-import { useNavigate } from "react-router-dom";
 import styled, { css } from "styled-components";
 import undo from './undo.png';
-import { Link } from "react-router-dom";
+import { Link, useNavigate} from "react-router-dom";
 import data from "../example_data/note_user_id.json";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import './style.css';
 import axios from 'axios';
 
@@ -93,40 +92,25 @@ const Caution = styled.div`
 
 
 function Login(props){
-  const navigate=useNavigate();
   
   const [email,setEmail]=useState('');
-  const [pw,setPw]=useState("");
+  const [password,setPassword]=useState('');
+  const [error, setError]=useState(null);
+  const navigate=useNavigate();
 
-  const checkUser=()=>{
-    //if(email===""||pw===""){
-      //<Caution>ID/PW를 다시 확인해주세요.</Caution>
-      //return;
-    //}
-    axios
-  .post('http://localhost:1337/api/auth/local', {
-    user_email: email,
-    user_pw:pw
-  })
-  .then(response => {
-    // Handle success.
-    console.log('Well done!');
-    console.log('User token', response.data.jwt);
-    localStorage.setItem("token",response.data.jwt);
-    navigate('/',{replace:true});
-  })
-  .catch(error => {
-    // Handle error.
-    console.log('An error occurred:', error.response);
-  });
-  }
-
-  useEffect(()=>{
-    if (localStorage.getItem("token")){
-      navigate('/',{replace:true});
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    try {
+      const response = await axios.post('/api/login', {
+        user_email:email,
+        user_pw:password,
+      });
+      console.log(response.data);
+      navigate.pushState('/note/${response.data.response.user_id}/make')
+    } catch (err) {
+      setError("ID/PW를 다시 확인해주세요.");
     }
-  })
- 
+  };
 
   return(
     <Background>
@@ -143,27 +127,28 @@ function Login(props){
         </Header>
         <div className={styles.center}>
           <h2 className={styles.noteowner}>이메일</h2>
-          <form>
+          <form onSubmit={handleSubmit}>
           <p>
-          <input type="text" className={styles.textbox} placeholder='이메일을 입력해주세요.' value={email} onChange={(event)=>{
-            setEmail(event.target.value);
+          <input type="text" className={styles.textbox} placeholder='이메일을 입력해주세요.' value={email} onChange={(e)=>{
+            setEmail(e.target.value);
           }}/>
           </p>
           <h2 className={styles.noteintroduce}>비밀번호</h2>
           <p>
-          <input type="text" className={styles.textbox} placeholder='비밀번호를 입력해주세요.' value={pw} onChange={(event)=>{
-            setPw(event.target.value);
+          <input type="text" className={styles.textbox} placeholder='비밀번호를 입력해주세요.' value={password} onChange={(e)=>{
+            setPassword(e.target.value);
           }}/>
           </p>
           </form>
+          {error && <Caution>{error}</Caution>}
         </div>
         <br></br>
         <div className={styles.under}>
-          <div><Link to={props.go1}>
-            <Button onclick={()=>{checkUser();}}>
+          <div>
+            <Button type="submit">
               {props.text1}
             </Button>
-            </Link></div>
+            </div>
         </div>
         <div className={styles.under}>
           <div><Link to={props.go2}><Button2>{props.text2}</Button2></Link></div>
