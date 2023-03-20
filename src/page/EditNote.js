@@ -1,6 +1,7 @@
 import undo from './undo.png';
 import './style.css';
 import { Link } from "react-router-dom";
+import { useState} from "react";
 
 function Top(props){
   return <div>
@@ -14,32 +15,29 @@ function Top(props){
 }
 
 function Center(){
+  var [nameText, setNameText] = useState('');
+  var [introduceText, setIntroduceText] = useState('');
+
+  var nameChange = (e) =>{
+    setNameText(e.target.value);
+  }
+
+  var introduceChange = (e) => {
+    setIntroduceText(e.target.value);
+  }
+
   return <div id="center">
-    <div><h2 class="h2div">노트의 주인</h2></div>
-    <input type="textbox" id="textbox1" class="textbox" maxLength="12" placeholder="별명/이름을 입력해주세요." onChange={
-      (ele)=>{
-        console.log(ele.target.value.length)
-        if (ele.target.value.length <= 0){
-          console.log("내용을 1자이상 입력해주세요")
-        } else if (ele.target.value.length >= 12){
-          console.log("모든 글자 수를 채웠습니다.")
-        }
-      }
-    }/>
-    <span>{0}/12</span>
+    <h2 class="h2div">노트의 주인</h2>
+    <input type="textbox" className="textbox" maxLength="12" placeholder="별명/이름을 입력해주세요." onChange={nameChange} value={nameText}/>
+    {nameText.length === 0 ? (
+      <p className="error">이름을 1자 이상 입력해주세요.</p>
+    ) : <p>{nameText.length}/12</p>}
     <div></div>
-    <div><h2 class="h2div">노트 소개</h2></div>
-    <input type="textbox" className="textbox" maxLength="30" placeholder="나의 노트를 소개해보세요." onChange={
-      (ele)=>{
-        console.log(ele.target.value.length)
-        if (ele.target.value.length == 0){
-          console.log("내용을 1자이상 입력해주세요")
-        } else if (ele.target.value.length >= 30){
-          console.log("모든 글자 수를 채웠습니다.")
-        }
-      }
-    } />
-    <span>{0}/30</span>
+    <h2 class="h2div">노트 소개</h2>
+    <input type="textbox" className="textbox" maxLength="30" placeholder="나의 노트를 소개해보세요." onChange={introduceChange} value={introduceText}/>
+    {introduceText.length === 0 ? (
+      <p className="error">소개를 1자 이상 입력해주세요.</p>
+    ) : <p>{introduceText.length}/30</p>}
   </div>
 }
 
@@ -59,7 +57,7 @@ function App() {
       <div id="UI">
           <Top title="내 노트 수정하기" undo="../"></Top>
           <Center></Center>
-          <Under text="노트 수정하기" gogo="/EditSuccess"></Under>
+          <Under text="노트 수정하기" gogo="/MakeSuccess"></Under>
       </div>
       <div className="yellowBG"></div>
     </div>
