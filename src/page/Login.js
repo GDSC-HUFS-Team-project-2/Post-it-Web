@@ -1,8 +1,7 @@
 import styles from "../Login.module.css";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import undo from './undo.png';
 import { Link, useNavigate} from "react-router-dom";
-import data from "../example_data/note_user_id.json";
 import { useState } from "react";
 import './style.css';
 import axios from 'axios';
@@ -85,9 +84,10 @@ const Caution = styled.div`
   font-size: 1rem;
   font-family: Verdana;
   width: 400px;
-  padding: 10px;
+  padding: 9px;
   color: #e73a3a;
   text-align: left;
+  padding-left:7.5vh;
 `;
 
 
@@ -105,9 +105,12 @@ function Login(props){
         user_email:email,
         user_pw:password,
       });
-      console.log(response.data);
-      navigate.pushState('/note/${response.data.response.user_id}/make')
-    } catch (err) {
+    if (response.data.note_exist) {
+        navigate(`/note/${response.data.user_id}`);
+      } else {
+        navigate(`/note/${response.data.user_id}/make`);
+      }
+    } catch (error) {
       setError("ID/PW를 다시 확인해주세요.");
     }
   };
@@ -118,41 +121,41 @@ function Login(props){
         <Header>
           <HeaderRow>
           <div id="menuBar2">
-        <div><Link to={props.undo}><button id="undo"><img src={undo}></img></button></Link></div>
+        <div><Link to={props.undo}><button id="undo"><img src={undo} alt="Undo"></img></button></Link></div>
         <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div><Title>로그인</Title>
         <div></div>
     </div>
           
         </HeaderRow>
         </Header>
-        <div className={styles.center}>
-          <h2 className={styles.noteowner}>이메일</h2>
-          <form onSubmit={handleSubmit}>
-          <p>
-          <input type="text" className={styles.textbox} placeholder='이메일을 입력해주세요.' value={email} onChange={(e)=>{
-            setEmail(e.target.value);
-          }}/>
-          </p>
-          <h2 className={styles.noteintroduce}>비밀번호</h2>
-          <p>
-          <input type="text" className={styles.textbox} placeholder='비밀번호를 입력해주세요.' value={password} onChange={(e)=>{
-            setPassword(e.target.value);
-          }}/>
-          </p>
-          </form>
-          {error && <Caution>{error}</Caution>}
-        </div>
+<div className={styles.center}>
+    <h2 className={styles.noteowner}>이메일</h2>
+    <form onSubmit={handleSubmit}>
+      <p>
+        <input type="text" className={styles.textbox} placeholder='이메일을 입력해주세요.' value={email} onChange={(e)=>{
+          setEmail(e.target.value);
+        }}/>
+      </p>
+      <h2 className={styles.noteintroduce}>비밀번호</h2>
+      <p>
+        <input type="password" className={styles.textbox} placeholder='비밀번호를 입력해주세요.' value={password} onChange={(e)=>{
+          setPassword(e.target.value);
+        }}/>
+      </p>
+      <div>{error && <Caution>{error}</Caution>}</div>
+      <div className={styles.under}>
         <br></br>
-        <div className={styles.under}>
-          <div>
-            <Button type="submit">
-              {props.text1}
-            </Button>
-            </div>
+        <div>
+          <Button type="submit">
+            {props.text1}
+          </Button>
         </div>
-        <div className={styles.under}>
-          <div><Link to={props.go2}><Button2>{props.text2}</Button2></Link></div>
-        </div>
+      </div>
+    </form>
+  </div>
+  <div className={styles.under}>
+    <div><Link to={props.go2}><Button2>{props.text2}</Button2></Link></div>
+  </div>
     </Wrap>
     </Background>
   )
@@ -161,7 +164,7 @@ function Login(props){
 
 function App(){
   return(
-<Login go1="/note/:user_id/make" text1="로그인" go2="/signup" text2="회원가입" undo="../"></Login>
+<Login text1="로그인" go2="/signup" text2="회원가입" undo="../"></Login>
   );
 }
 
