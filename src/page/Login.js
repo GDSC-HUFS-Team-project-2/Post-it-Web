@@ -101,7 +101,7 @@ function Login(props){
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await axios.post('/api/login', {
+      const response = await axios.post('/login', {
         user_email:email,
         user_pw:password,
       });
@@ -122,7 +122,7 @@ function Login(props){
           <HeaderRow>
           <div id="menuBar2">
         <div><Link to={props.undo}><button id="undo"><img src={undo} alt="Undo"></img></button></Link></div>
-        <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div><Title>로그인</Title>
+        <div>&nbsp;&nbsp;&nbsp;&nbsp;</div><Title>로그인</Title>
         <div></div>
     </div>
           
