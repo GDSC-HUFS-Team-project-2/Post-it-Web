@@ -68,9 +68,8 @@ function SignUpSuccess(props) {
       <Wrap>
         <Header>
           <HeaderRow>
-
           <div id="menuBar2">
-        <div><Link to={props.undo}><button id="undo"><img src={undo}></img></button></Link></div>
+        <div><Link to={props.undo}><button id="undo"><img src={undo} alt="Undo"></img></button></Link></div>
         <div>&nbsp;</div><Title>회원가입</Title>
         <div></div>
     </div>
