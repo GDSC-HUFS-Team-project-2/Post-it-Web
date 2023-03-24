@@ -7,6 +7,7 @@ import paper_3 from "../assets/paper_3.png";
 
 import { useNavigate, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
+import axios from "axios";
 import data from "../example_data/note_user_id.json";
 
 const Background = styled.div`
@@ -185,14 +186,25 @@ function Note(props) {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     let [post, setPost] = useState(data);
     const location = useLocation();
+    const handleLogout = () => {
+        // 로그아웃 처리
+        setIsLoggedIn(false);
+    };
 
     useEffect(() => {
-        // 쿠키 가져오기
-        // 쿠키 있으면 setIsLoggedIn(true)
-        // 쿠키 없으면 setIsLoggedIn(false)
+        // 부모 컴포넌트에서 로그인 여부를 전달
+        setIsLoggedIn(props.isLoggedIn);
 
-        // 로그인 하지 않았다고 가정
-        setIsLoggedIn(false);
+        // 데이터 가져오기
+        const fetchData = async () => {
+            try {
+                const response = await axios.get(`/note/${props.user_id}`);
+                setPost(response, data);
+            } catch (err) {
+                console.error(err);
+            }
+        };
+        fetchData();
     }, [location]);
     if (!isLoggedIn) {
         // 로그인 안한 상태
@@ -202,7 +214,13 @@ function Note(props) {
                     <Header>
                         <HeaderRow>
                             <Title>용순이의 노트</Title>
-                            <LoginButton>로그인</LoginButton>
+                            <LoginButton
+                                onClick={() => {
+                                    navigate(`/login`);
+                                }}
+                            >
+                                로그인
+                            </LoginButton>
                         </HeaderRow>
                         <HeaderRow>
                             <Introduce>
@@ -218,7 +236,12 @@ function Note(props) {
                         <ClipboardCopy url={location.pathname} />
                         <AddButton
                             onClick={() => {
-                                navigate("/note/:note_id/write");
+                                navigate(`/note/${post.note_id}/write`, {
+                                    state: {
+                                        note_id: post.note_id,
+                                        user_id: props.user_id,
+                                    },
+                                });
                             }}
                         />
                     </FloatingButtonContainer>
@@ -233,7 +256,9 @@ function Note(props) {
                     <Header>
                         <HeaderRow>
                             <Title>{props.user_id}의 노트</Title>
-                            <LoginButton>로그아웃</LoginButton>
+                            <LoginButton onLogout={handleLogout}>
+                                로그아웃
+                            </LoginButton>
                         </HeaderRow>
                         <HeaderRow>
                             <Introduce>
@@ -243,13 +268,13 @@ function Note(props) {
                     </Header>
                     <Line />
                     <Content>
-                        <PostIt data={post.post_data}></PostIt>
+                        <PostIt data={post}></PostIt>
                     </Content>
                     <FloatingButtonContainer>
                         <ClipboardCopy url={location.pathname} />
                         <EditButton
                             onClick={() => {
-                                navigate("/note/:user_id/edit");
+                                navigate(`/note/${props.user_id}/edit`);
                             }}
                         />
                     </FloatingButtonContainer>
