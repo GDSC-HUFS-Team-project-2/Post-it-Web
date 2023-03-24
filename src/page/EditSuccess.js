@@ -17,8 +17,8 @@ function Center(){
   return <div id="center">
     <div></div>
     <div>
-      <h2 id="h2success">생성 완료!</h2>
-      <h3>만든 노트를 구경하러 가볼까요?</h3>
+      <h2 id="h2success">수정 완료!</h2>
+      <h3>수정된 노트를 확인하러 가볼까요?</h3>
     </div>
     <div></div>
     
@@ -38,7 +38,7 @@ function App() {
     <div className="threeHalf">
       <div className="yellowBG"></div>
       <div id="UI">
-          <Top title="내 노트 만들기" undo="/MakeNote"></Top>
+          <Top title="내 노트 만들기" undo="/EditNote"></Top>
           <Center></Center>
           <Under text="노트 보러가기" gogo=""></Under>
       </div>
