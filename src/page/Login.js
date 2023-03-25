@@ -91,7 +91,7 @@ const Caution = styled.div`
 `;
 
 
-function Login(props){
+function LoginPage(props){
   
   const [email,setEmail]=useState('');
   const [password,setPassword]=useState('');
@@ -102,11 +102,17 @@ function Login(props){
     event.preventDefault();
     try {
       const response = await axios.post('/login', {
-        user_email:email,
-        user_pw:password,
+        user_email: email,
+        user_pw: password,
       });
-    if (response.data.note_exist) {
-        navigate(`/note/${response.data.user_id}`);
+      if (response.data.note_exist) {
+        props.setIsLoggedIn(true);
+        navigate(`/note/${response.data.user_id}`, {
+          state: {
+            user_id: response.data.user_id,
+            isLoggedIn: true
+          }
+        });
       } else {
         navigate(`/note/${response.data.user_id}/make`);
       }
@@ -162,10 +168,12 @@ function Login(props){
   
 };
 
-function App(){
+function Login(){
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
   return(
-<Login text1="로그인" go2="/signup" text2="회원가입" undo="../"></Login>
+<LoginPage text1="로그인" go2="/signup" text2="회원가입" undo="../" isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn}></LoginPage>
   );
 }
 
-export default App;
+export default Login;
