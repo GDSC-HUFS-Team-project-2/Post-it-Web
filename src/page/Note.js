@@ -193,12 +193,14 @@ function Note(props) {
 
     useEffect(() => {
         // 부모 컴포넌트에서 로그인 여부를 전달
-        setIsLoggedIn(props.isLoggedIn);
+        setIsLoggedIn(props.location.state.isLoggedIn);
 
         // 데이터 가져오기
         const fetchData = async () => {
             try {
-                const response = await axios.get(`/note/${props.user_id}`);
+                const response = await axios.get(
+                    `/note/${props.location.state.user_id}`
+                );
                 setPost(response, data);
             } catch (err) {
                 console.error(err);
@@ -239,7 +241,7 @@ function Note(props) {
                                 navigate(`/note/${post.note_id}/write`, {
                                     state: {
                                         note_id: post.note_id,
-                                        user_id: props.user_id,
+                                        user_id: props.location.state.user_id,
                                     },
                                 });
                             }}
@@ -255,7 +257,7 @@ function Note(props) {
                 <Wrap>
                     <Header>
                         <HeaderRow>
-                            <Title>{props.user_id}의 노트</Title>
+                            <Title>{props.location.state.user_id}의 노트</Title>
                             <LoginButton onLogout={handleLogout}>
                                 로그아웃
                             </LoginButton>
@@ -274,7 +276,9 @@ function Note(props) {
                         <ClipboardCopy url={location.pathname} />
                         <EditButton
                             onClick={() => {
-                                navigate(`/note/${props.user_id}/edit`);
+                                navigate(
+                                    `/note/${props.location.state.user_id}/edit`
+                                );
                             }}
                         />
                     </FloatingButtonContainer>
