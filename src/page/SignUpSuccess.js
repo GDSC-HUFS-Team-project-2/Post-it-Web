@@ -60,7 +60,7 @@ const Button = styled.button`
   }
 `;
 
-function SignUpSuccess(props) {
+function SignUpSuccessPage(props) {
 
 
   return (
@@ -87,10 +87,10 @@ function SignUpSuccess(props) {
   );
 }
 
-function App(){
+function SignUpSuccess(){
   return(
-<SignUpSuccess go1="/login" text1="로그인 하러가기" undo="../"></SignUpSuccess>
+<SignUpSuccessPage go1="/login" text1="로그인 하러가기" undo="../"></SignUpSuccessPage>
   );
 }
 
-export default App;
+export default SignUpSuccess;

@@ -40,7 +40,7 @@ const Button = styled.button`
   }
 `;
 
-function Home(props){
+function HomePage(props){
   const [data, setData] = useState([]);
 
   useEffect(() => {
@@ -80,11 +80,11 @@ function Home(props){
     </Background>
   )
 }
-function App(){
+function Home(){
   return(
-    <Home go1="/login" text1="로그인" go2="/signup" text2="회원가입"></Home>
+    <HomePage go1="/login" text1="로그인" go2="/signup" text2="회원가입"></HomePage>
     
   );
 }
 
-export default App;
+export default Home;

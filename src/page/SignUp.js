@@ -88,7 +88,7 @@ const Caution = styled.div`
   padding-left:7.5vh;
   display: ${({ errorMessage }) => errorMessage ? 'block' : 'none'};
 `;
-function SignUp(props) {
+function SignUpPage(props) {
   const navigate = useNavigate();
 
   const [email, setEmail] = useState('');
@@ -173,9 +173,9 @@ const register = async () => {
   )
 }
 
-function App(){
+function SignUp(){
   return(
-    <SignUp go1="/login" text1="로그인" go2="/SignUpSuccess" text2="회원가입" undo="../"></SignUp>
+    <SignUpPage go1="/login" text1="로그인" go2="/SignUpSuccess" text2="회원가입" undo="../"></SignUpPage>
   );
 }
-export default App;
+export default SignUp;
