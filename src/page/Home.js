@@ -1,8 +1,10 @@
-import homestyles from "../Home.module.css"
-import { useNavigate } from "react-router-dom";
-import {Link} from 'react-router-dom'
+import React, { useState, useEffect } from 'react';
+import homestyles from "../Home.module.css";
+import {Link} from 'react-router-dom';
 import styled, { css } from "styled-components";
-import post_it from "../assets/post_it.png"
+import post_it from "../assets/post_it.png";
+import axios from "axios";
+
 
 const Background = styled.div`
   background-color: #fff1a8;
@@ -25,7 +27,7 @@ const Button = styled.button`
   font-size: 200%;
   background-color: #FFE27A;
   color: black;
-  width: 100%;
+  width: 87%;
   height: 7vh;
   border-radius: 10px;
   border-style: hidden;
@@ -38,8 +40,19 @@ const Button = styled.button`
   }
 `;
 
-function Home(props){
-  
+function HomePage(props){
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    axios.get("/")
+      .then(response => {
+        setData(response.data);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }, []);
+
 
 
   return(
@@ -67,11 +80,11 @@ function Home(props){
     </Background>
   )
 }
-function App(){
+function Home(){
   return(
-    <Home go1="/login" text1="로그인" go2="/signup" text2="회원가입"></Home>
+    <HomePage go1="/login" text1="로그인" go2="/signup" text2="회원가입"></HomePage>
     
   );
 }
 
-export default App;
+export default Home;

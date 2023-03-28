@@ -60,7 +60,7 @@ const Button = styled.button`
   }
 `;
 
-function SignUpSuccess(props) {
+function SignUpSuccessPage(props) {
 
 
   return (
@@ -68,9 +68,8 @@ function SignUpSuccess(props) {
       <Wrap>
         <Header>
           <HeaderRow>
-
           <div id="menuBar2">
-        <div><Link to={props.undo}><button id="undo"><img src={undo}></img></button></Link></div>
+        <div><Link to={props.undo}><button id="undo"><img src={undo} alt="Undo"></img></button></Link></div>
         <div>&nbsp;</div><Title>회원가입</Title>
         <div></div>
     </div>
@@ -88,10 +87,10 @@ function SignUpSuccess(props) {
   );
 }
 
-function App(){
+function SignUpSuccess(){
   return(
-<SignUpSuccess go1="/login" text1="로그인 하러가기" undo="../"></SignUpSuccess>
+<SignUpSuccessPage go1="/login" text1="로그인 하러가기" undo="../"></SignUpSuccessPage>
   );
 }
 
-export default App;
+export default SignUpSuccess;
