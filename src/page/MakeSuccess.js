@@ -33,7 +33,7 @@ function Under(props){
   </div>
 }
 
-function App() {
+function makeSuccess() {
   return (
     <div className="threeHalf">
       <div className="yellowBG"></div>
@@ -47,4 +47,4 @@ function App() {
   );
 }
 
-export default App;
+export default makeSuccess;

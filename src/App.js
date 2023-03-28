@@ -42,8 +42,8 @@ export default function App() {
           <Route path="*" element={<div>404</div>}></Route>
           <Route path="/note/:user_id/edit" element={<EditNote />} />
           <Route path="/note/:user_id/make" element={<MakeNote />} />
-          <Route path="/note/:user_id/make" element={<MakeSuccess />} />
-          <Route path="/note/:user_id/edit" element={<EditSuccess />} />
+          <Route path="/note/:user_id/makeSuccess" element={<MakeSuccess />} />
+          <Route path="/note/:user_id/editSuccess" element={<EditSuccess />} />
         </Routes>
       </Suspense>
     </div>
