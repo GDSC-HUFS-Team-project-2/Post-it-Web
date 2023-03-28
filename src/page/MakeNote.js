@@ -50,18 +50,18 @@ function Under(props){
   </div>
 }
 
-function App() {
+function makeNote() {
   return (
     <div className="threeHalf">
       <div className="yellowBG"></div>
       <div id="UI">
           <Top title="내 노트 만들기" undo="../"></Top>
           <Center></Center>
-          <Under text="노트 만들기" gogo="/MakeSuccess"></Under>
+          <Under text="노트 만들기" gogo="/note/:user_id/makeSuccess"></Under>
       </div>
       <div className="yellowBG"></div>
     </div>
   );
 }
 
-export default App;
+export default makeNote;

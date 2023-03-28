@@ -50,18 +50,18 @@ function Under(props){
   </div>
 }
 
-function App() {
+function editNote() {
   return (
     <div className="threeHalf">
       <div className="yellowBG"></div>
       <div id="UI">
           <Top title="내 노트 수정하기" undo="../"></Top>
           <Center></Center>
-          <Under text="노트 수정하기" gogo="/MakeSuccess"></Under>
+          <Under text="노트 수정하기" gogo="/note/:user_id/editSuccess"></Under>
       </div>
       <div className="yellowBG"></div>
     </div>
   );
 }
 
-export default App;
+export default editNote;
